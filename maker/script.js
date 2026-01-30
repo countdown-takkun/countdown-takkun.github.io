@@ -1,63 +1,37 @@
-const params = new URLSearchParams(location.search);
-const lang = params.get("lang") || "jp";
+const p=new URLSearchParams(location.search);
+const lang=p.get("lang")||"jp";
 
-const T = {
-  jp: {
-    title: "カウントダウン作成",
-    labelTitle: "タイトル",
-    labelDate: "日時",
-    labelDesc: "説明文",
-    btn: "URLを作成",
-    share: "このURLを共有:",
-    copy: "コピー",
-    open: "開く",
-    alert: "日時を入力してください"
-  },
-  en: {
-    title: "Create Countdown",
-    labelTitle: "Title",
-    labelDate: "Date & Time",
-    labelDesc: "Description",
-    btn: "Generate URL",
-    share: "Share this link:",
-    copy: "Copy",
-    open: "Open",
-    alert: "Please select a date"
-  }
+const T={
+jp:{title:"カウントダウン作成",t:"タイトル",d:"日時",de:"説明文",b:"URLを作成",s:"このURLを共有:",c:"コピー",o:"開く",a:"日時を入力"},
+en:{title:"Create Countdown",t:"Title",d:"Date",de:"Description",b:"Generate",s:"Share:",c:"Copy",o:"Open",a:"Select date"}
 };
 
-document.querySelector("h1").textContent = T[lang].title;
-document.querySelectorAll("label")[0].textContent = T[lang].labelTitle;
-document.querySelectorAll("label")[1].textContent = T[lang].labelDate;
-document.querySelectorAll("label")[2].textContent = T[lang].labelDesc;
+const L=T[lang];
+document.querySelector("h1").textContent=L.title;
+const labels=document.querySelectorAll("label");
+labels[0].textContent=L.t;
+labels[1].textContent=L.d;
+labels[2].textContent=L.de;
+document.getElementById("create").textContent=L.b;
 
-document.getElementById("create").textContent = T[lang].btn;
+document.getElementById("create").onclick=()=>{
+const title=encodeURIComponent(document.getElementById("title").value||L.title);
+const date=document.getElementById("date").value;
+if(!date)return alert(L.a);
+const desc=encodeURIComponent(document.getElementById("desc").value||"");
+const bg=bg.value.replace("#","");
+const text=text.value.replace("#","");
+const card=card.value.replace("#","");
+const alpha=alpha.value;
 
-document.getElementById("create").onclick = () => {
-  const title = encodeURIComponent(
-    document.getElementById("title").value || T[lang].title
-  );
-  const date = document.getElementById("date").value;
-  const desc = encodeURIComponent(document.getElementById("desc").value || "");
-  const bg = document.getElementById("bg").value.replace("#", "");
-  const text = document.getElementById("text").value.replace("#", "");
-  const card = document.getElementById("card").value.replace("#", "");
-  const alpha = document.getElementById("alpha").value;
+const base=location.origin+location.pathname.replace("/maker/","/countdown/");
+const url=`${base}?title=${title}&desc=${desc}&date=${encodeURIComponent(date)}&bg=${bg}&text=${text}&card=${card}&alpha=${alpha}&lang=${lang}`;
 
-  if (!date) return alert(T[lang].alert);
-
-  const base = location.origin + location.pathname.replace("/maker/", "/countdown/");
-  const url = `${base}?title=${title}&desc=${desc}&date=${encodeURIComponent(date)}&bg=${bg}&text=${text}&card=${card}&alpha=${alpha}&lang=${lang}`;
-
-  document.getElementById("result").classList.remove("hidden");
-  document.querySelector("#result p").textContent = T[lang].share;
-  document.getElementById("url").value = url;
-  document.getElementById("open").textContent = T[lang].open;
-  document.getElementById("open").href = url;
-
-  document.getElementById("copy").textContent = T[lang].copy;
-  document.getElementById("copy").onclick = () => {
-    navigator.clipboard.writeText(url);
-    alert("OK!");
-  };
+result.classList.remove("hidden");
+result.querySelector("p").textContent=L.s;
+urlInput=urlField=url;
+document.getElementById("url").value=url;
+open.textContent=L.o;open.href=url;
+copy.textContent=L.c;
+copy.onclick=()=>{navigator.clipboard.writeText(url);alert("OK!");}
 };
