@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Maker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>カウントダウン作成</h1>
+
+    <label>タイトル</label>
+    <input id="title" placeholder="例：新年まで">
+
+    <label>日時</label>
+    <input type="datetime-local" id="date">
+
+    <button id="create">URLを作成</button>
+
+    <div id="result" class="hidden">
+      <p>このURLを共有:</p>
+      <input id="url" readonly>
+      <button id="copy">コピー</button>
+      <a id="open" target="_blank">開く</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
