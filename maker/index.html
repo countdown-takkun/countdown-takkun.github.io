@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>Countdown Maker</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Maker</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>カウントダウン作成</h1>
+<div class="container">
+<h1></h1>
 
-    <label>タイトル</label>
-    <input id="title" placeholder="例：新年まで">
+<label></label>
+<input id="title">
 
-    <label>日時</label>
-    <input type="datetime-local" id="date">
+<label></label>
+<input type="datetime-local" id="date">
 
-    <label>説明文</label>
-    <input id="desc" placeholder="例：サーバー公開まで">
+<label></label>
+<input id="desc">
 
-    <label>背景色</label>
-    <input type="color" id="bg" value="#0f2027">
+<label>背景色</label>
+<input type="color" id="bg" value="#0f2027">
 
-    <label>文字色</label>
-    <input type="color" id="text" value="#ffffff">
+<label>文字色</label>
+<input type="color" id="text" value="#ffffff">
 
-    <label>タイマーカード色</label>
-    <input type="color" id="card" value="#000000">
+<label>カード色</label>
+<input type="color" id="card" value="#000000">
 
-    <label>透明度</label>
-    <input type="range" id="alpha" min="0" max="100" value="40">
+<label>透明度</label>
+<input type="range" id="alpha" min="0" max="100" value="40">
 
+<button id="create"></button>
 
-    <button id="create">URLを作成</button>
-
-    <div id="result" class="hidden">
-      <p>このURLを共有:</p>
-      <input id="url" readonly>
-      <button id="copy">コピー</button>
-      <a id="open" target="_blank">開く</a>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+<div id="result" class="hidden">
+<p></p>
+<input id="url" readonly>
+<button id="copy"></button>
+<a id="open" target="_blank"></a>
+</div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
