@@ -1,34 +1,34 @@
-const p = new URLSearchParams(location.search);
-const lang = p.get("lang") || "jp";
+const p=new URLSearchParams(location.search);
+const lang=p.get("lang")||"jp";
 
-const T = {
-  jp: { done: "🎉 時間になりました！" },
-  en: { done: "🎉 Time is up!" }
-};
+const title=decodeURIComponent(p.get("title")||"Countdown");
+const desc=decodeURIComponent(p.get("desc")||"");
+document.getElementById("title").textContent=title;
+document.getElementById("desc").textContent=desc;
 
-document.getElementById("title").textContent =
-  decodeURIComponent(p.get("title") || (lang === "en" ? "Countdown" : "イベントまで"));
+const bg=p.get("bg")||"0f2027";
+const text=p.get("text")||"ffffff";
+const card=p.get("card")||"000000";
+const alpha=p.get("alpha")||"40";
 
-const targetDate = new Date(p.get("date")).getTime();
-const doneEl = document.getElementById("done");
-doneEl.textContent = T[lang].done;
+document.body.style.background="#"+bg;
+document.body.style.color="#"+text;
 
-const daysEl = document.getElementById("days");
-const hoursEl = document.getElementById("hours");
-const minutesEl = document.getElementById("minutes");
-const secondsEl = document.getElementById("seconds");
+document.querySelector(".container").style.background=
+`rgba(${parseInt(card.substr(0,2),16)},${parseInt(card.substr(2,2),16)},${parseInt(card.substr(4,2),16)},${alpha/100})`;
 
-function update() {
-  const d = targetDate - Date.now();
-  if (d <= 0) {
-    doneEl.classList.remove("hidden");
-    return;
-  }
-  daysEl.textContent = Math.floor(d / 86400000);
-  hoursEl.textContent = Math.floor((d / 3600000) % 24);
-  minutesEl.textContent = Math.floor((d / 60000) % 60);
-  secondsEl.textContent = Math.floor((d / 1000) % 60);
+const doneText={jp:"🎉 時間になりました！",en:"🎉 Time is up!"};
+document.getElementById("done").textContent=doneText[lang];
+
+const target=new Date(p.get("date")).getTime();
+const dEl=days,hEl=hours,mEl=minutes,sEl=seconds;
+
+function tick(){
+const diff=target-Date.now();
+if(diff<=0){document.getElementById("done").classList.remove("hidden");return;}
+dEl.textContent=Math.floor(diff/86400000);
+hEl.textContent=Math.floor((diff/3600000)%24);
+mEl.textContent=Math.floor((diff/60000)%60);
+sEl.textContent=Math.floor((diff/1000)%60);
 }
-
-setInterval(update, 1000);
-update();
+setInterval(tick,1000);tick();
