@@ -6,6 +6,7 @@ const T = {
     title: "カウントダウン作成",
     labelTitle: "タイトル",
     labelDate: "日時",
+    labelDesc: "説明文",
     btn: "URLを作成",
     share: "このURLを共有:",
     copy: "コピー",
@@ -16,6 +17,7 @@ const T = {
     title: "Create Countdown",
     labelTitle: "Title",
     labelDate: "Date & Time",
+    labelDesc: "Description",
     btn: "Generate URL",
     share: "Share this link:",
     copy: "Copy",
@@ -27,6 +29,8 @@ const T = {
 document.querySelector("h1").textContent = T[lang].title;
 document.querySelectorAll("label")[0].textContent = T[lang].labelTitle;
 document.querySelectorAll("label")[1].textContent = T[lang].labelDate;
+document.querySelectorAll("label")[2].textContent = T[lang].labelDesc;
+
 document.getElementById("create").textContent = T[lang].btn;
 
 document.getElementById("create").onclick = () => {
@@ -34,10 +38,16 @@ document.getElementById("create").onclick = () => {
     document.getElementById("title").value || T[lang].title
   );
   const date = document.getElementById("date").value;
+  const desc = encodeURIComponent(document.getElementById("desc").value || "");
+  const bg = document.getElementById("bg").value.replace("#", "");
+  const text = document.getElementById("text").value.replace("#", "");
+  const card = document.getElementById("card").value.replace("#", "");
+  const alpha = document.getElementById("alpha").value;
+
   if (!date) return alert(T[lang].alert);
 
   const base = location.origin + location.pathname.replace("/maker/", "/countdown/");
-  const url = `${base}?title=${title}&date=${encodeURIComponent(date)}&lang=${lang}`;
+  const url = `${base}?title=${title}&desc=${desc}&date=${encodeURIComponent(date)}&bg=${bg}&text=${text}&card=${card}&alpha=${alpha}&lang=${lang}`;
 
   document.getElementById("result").classList.remove("hidden");
   document.querySelector("#result p").textContent = T[lang].share;
